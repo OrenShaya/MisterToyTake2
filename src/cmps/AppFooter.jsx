@@ -1,7 +1,7 @@
 
 import { UserMsg } from './UserMsg.jsx'
 import { ShoppingCart } from './ShoppingCart.jsx'
-import { TOGGLE_Cart_IS_SHOWN } from '../store/reducers/toy.reducer.js'
+import { TOGGLE_CART_IS_SHOWN } from '../store/reducers/toy.reducer.js'
 import { useDispatch, useSelector } from 'react-redux'
 
 export function AppFooter() {
@@ -23,7 +23,7 @@ export function AppFooter() {
                 <span>{shoppingCartLength}</span> Products in your Cart
                 <a href="#" onClick={(ev) => {
                     ev.preventDefault()
-                    dispatch({ type: TOGGLE_Cart_IS_SHOWN })
+                    dispatch({ type: TOGGLE_CART_IS_SHOWN })
                 }}>
                     ({(isCartShown) ? 'hide' : 'show'})
                 </a>

@@ -15,19 +15,28 @@ export const REMOVE_TOY = 'REMOVE_TOY'
 export const ADD_TOY = 'ADD_TOY'
 export const UPDATE_TOY = 'UPDATE_TOY'
 
-export const SET_COUNT_TOY = 'SET_COUNT_TOY'
 
 function appReducer(state = initialState, cmd = {}) {
+    var newToyModule = {}
     switch (cmd.type) {
         //* Toys
         case SET_TOYS:
-            return {...state, toys: cmd.toys}
+            newToyModule = {...state.toyModule, toys: cmd.toys}
+            const newState = {...state, ...newToyModule}
+            
+            console.log('new state:', newState)
+            
+            return {...state, ...newToyModule}
         case ADD_TOY:
-            return {...state, toys: [...state.toys, cmd.toy]}
+            const newToys = [...state.toyModule.toys, cmd.toy]
+            newToyModule = {...state.toyModule, toys: newToys}
+            return {...state, ...newToyModule}
         case REMOVE_TOY:
-            return {...state, toys: state.toys.filter(toy => toy._id !== cmd.toyId)}
+            newToyModule = {...state.toyModule, toys: state.toyModule.toys.filter(toy => toy._id !== cmd.toyId)}
+            return {...state, ...newToyModule}
         case UPDATE_TOY:
-            return {...state, toys: state.toys.map(toy => toy._id === cmd.toy._id ? cmd.toy : toy)}
+            newToyModule = {...state.toyModule, toys: state.toyModule.toys.map(toy => toy._id === cmd.toy._id ? cmd.toy : toy)}
+            return {...state, ...newToyModule}
 
        default:
             return state

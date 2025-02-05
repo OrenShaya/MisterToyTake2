@@ -4,14 +4,13 @@ import { ToyList } from '../cmps/ToyList.jsx'
 import { toyService } from '../services/toy.service.js'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 import { loadToys, removeToy, saveToy, setFilterBy } from '../store/actions/toy.actions.js'
-import { ADD_TOY_TO_Cart } from '../store/reducers/toy.reducer.js'
+import { ADD_TOY_TO_CART } from '../store/reducers/toy.reducer.js'
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 export function ToyIndex() {
     const dispatch = useDispatch()
     const toys = useSelector(storeState => {
-        console.log(storeState)        
         return storeState.toyModule.toys})    
     const filterBy = useSelector(storeState => storeState.toyModule.filterBy)
     const isLoading = useSelector(storeState => storeState.toyModule.isLoading)
@@ -62,7 +61,7 @@ export function ToyIndex() {
 
     function addToCart(toy) {
         console.log(`Adding ${toy.vendor} to Cart`)
-        dispatch({ type: ADD_TOY_TO_Cart, toy })
+        dispatch({ type: ADD_TOY_TO_CART, toy })
         showSuccessMsg('Added to Cart')
     }
 

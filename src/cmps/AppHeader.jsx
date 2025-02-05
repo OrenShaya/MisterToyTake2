@@ -3,7 +3,7 @@ import { LoginSignup } from './LoginSignup.jsx'
 import { userService } from '../services/user.service.js'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 import { logout } from '../store/actions/user.actions.js'
-import { TOGGLE_Cart_IS_SHOWN } from '../store/reducers/toy.reducer.js'
+import { TOGGLE_CART_IS_SHOWN } from '../store/reducers/toy.reducer.js'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
@@ -25,7 +25,7 @@ export function AppHeader() {
 
     function onToggleCart(ev) {
         ev.preventDefault()
-        dispatch({ type: TOGGLE_Cart_IS_SHOWN })
+        dispatch({ type: TOGGLE_CART_IS_SHOWN })
     }
 
     return (
