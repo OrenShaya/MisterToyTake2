@@ -43,24 +43,27 @@ function save(toy) {
     if (toy._id) {
         return storageService.put(STORAGE_KEY, toy)
     } else {
-        toy.owner = userService.getLoggedinUser()
         return storageService.post(STORAGE_KEY, toy)
     }
 }
 
 function getEmptyToy() {
     return {
-        vendor: '',
-        price: '',
-        speed: '',
+        'name': '',
+        price: 0,
+        labels: [],
+        createdAt: new Date(),
+        inStock: false,
     }
 }
 
 function getRandomToy() {
     return {
-        vendor: 'Susita-' + (Date.now() % 1000),
-        price: utilService.getRandomIntInclusive(1000, 9000),
-        speed: utilService.getRandomIntInclusive(90, 200),
+        'name': utilService.makeToyName(),
+        price: utilService.getRandomIntInclusive(10, 450),
+        labels: utilService.getLabels(),
+        createdAt: utilService.randomDate(),
+        inStock: utilService.getRandomIntInclusive(0, 1) ? true : false,
     }
 }
 

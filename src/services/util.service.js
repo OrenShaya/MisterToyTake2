@@ -1,6 +1,9 @@
 export const utilService = {
     makeId,
     makeLorem,
+    makeToyName,
+    getLabels,
+    randomDate,
     getRandomIntInclusive,
     loadFromStorage,
     saveToStorage,
@@ -70,4 +73,72 @@ function debounce(func, timeout = 300) {
             func.apply(this, args)
         }, timeout)
     }
+}
+
+// Mister toy Util service funcitons
+function getFormatDate(date) {     
+    // same day
+    if (date.getDate === new Date().getDate() && 
+        date.getMonth === new Date().getMonth() && 
+        date.getYear === new Date().getYear()) 
+    { 
+        return date.getHours() + ':' + date.getMinutes()
+    }
+    if (date.getYear < new Date().getYear() || // bigger year
+          (date.getYear === new Date().getYear() && // or
+          date.getMonth() < new Date().getMonth()) || //bigger month
+          (date.getYear === new Date().getYear() && 
+          date.getMonth() === new Date().getMonth()) ||
+          (date.getDate() < new Date().getDate() - 7 &&
+          date.getYear === new Date().getYear() && 
+          date.getMonth() === new Date().getMonth())) // 
+    {
+        return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`
+    }
+    const day = date.getDay()
+    switch (day) {
+        case 0:
+            return 'Sunday'
+        case 1:
+            return 'Monday'
+        case 2:
+            return 'Tuesday'
+        case 3:
+            return 'Wednesday'
+        case 4:
+            return 'Thursday'
+        case 5:
+            return 'Friday'
+        case 6:
+            return 'Saturday'
+    }
+}
+
+function getLabels() {
+    const labels = ['On wheels', 'Box game', 'Art', 'Baby', 'Doll', 'Puzzle', 'Outdoor', 'Battery Powered']
+    const numOfLabels = getRandomIntInclusive(1, 5)
+    const newLabels = []
+    for (let i = 0; i < numOfLabels; i++) {
+        newLabels.push(labels[getRandomIntInclusive(0, labels.length)])
+    }
+    return newLabels
+}
+
+function makeToyName() {
+    const adj = ['Red', 'Blue', 'Lightning', 'Wooden', 'Fast', 'Wheeled',]
+    const nouns = ['Princess', 'Car', 'Train', 'Plane', 'Figure', 'Truck', 'Puzzle', 'Doll']
+    const adjNum = getRandomIntInclusive(1, 3)
+    let name = ''
+    for (let i = 0; i < adjNum; i++) {
+        name += adj[getRandomIntInclusive(0, adj.length - 1)] + ' '
+    }
+    name += nouns[getRandomIntInclusive(0, nouns.length - 1)]
+    return name
+}
+
+function randomDate() {
+    const year = getRandomIntInclusive(2024, 2025)
+    const month = getRandomIntInclusive(0, 11)
+    const day = getRandomIntInclusive(0, 29)
+    return new Date(`${month}-${day}-${year}`)
 }

@@ -22,21 +22,17 @@ function appReducer(state = initialState, cmd = {}) {
         //* Toys
         case SET_TOYS:
             newToyModule = {...state.toyModule, toys: cmd.toys}
-            const newState = {...state, ...newToyModule}
-            
-            console.log('new state:', newState)
-            
-            return {...state, ...newToyModule}
+            return {...state, toyModule: newToyModule}
         case ADD_TOY:
             const newToys = [...state.toyModule.toys, cmd.toy]
             newToyModule = {...state.toyModule, toys: newToys}
-            return {...state, ...newToyModule}
+            return {...state, toyModule: newToyModule}
         case REMOVE_TOY:
             newToyModule = {...state.toyModule, toys: state.toyModule.toys.filter(toy => toy._id !== cmd.toyId)}
-            return {...state, ...newToyModule}
+            return {...state, toyModule: newToyModule}
         case UPDATE_TOY:
             newToyModule = {...state.toyModule, toys: state.toyModule.toys.map(toy => toy._id === cmd.toy._id ? cmd.toy : toy)}
-            return {...state, ...newToyModule}
+            return {...state, toyModule: newToyModule}
 
        default:
             return state
