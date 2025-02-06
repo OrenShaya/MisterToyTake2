@@ -17,15 +17,14 @@ export const toyService = {
 
 function query(filterBy = {}) {
     return storageService.query(STORAGE_KEY)
-        .then(toys => {            
+        .then(toys => {              
             if (!filterBy.txt) filterBy.txt = ''
             if (!filterBy.maxPrice) filterBy.maxPrice = Infinity
             if (!filterBy.minSpeed) filterBy.minSpeed = -Infinity
             const regExp = new RegExp(filterBy.txt, 'i')
             return toys.filter(toy =>
-                regExp.test(toy.vendor) &&
-                toy.price <= filterBy.maxPrice &&
-                toy.speed >= filterBy.minSpeed
+                regExp.test(toy.name) &&
+                toy.price <= filterBy.maxPrice
             )
         })
 }
