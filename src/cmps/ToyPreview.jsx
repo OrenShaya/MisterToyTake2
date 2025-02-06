@@ -3,9 +3,7 @@ import { Link } from "react-router-dom";
 export function ToyPreview({ toy }) {
 
     function formatDate(date) {
-        console.log('day:', date.getDate(), new Date().getDate())
-        console.log('year:', date.getFullYear(), new Date().getFullYear())
-        console.log('month:', date.getMonth(), new Date().getMonth())
+        date = new Date(date)        
         
         // same day
         if (date.getDate() === new Date().getDate() && 
